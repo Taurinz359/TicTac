@@ -1,0 +1,12 @@
+{
+    "name": "taurinz/php-proj",
+    "type": "llibrary",
+    "autoload": {
+        "files": ["src/Tictac.php"]
+    },
+    "bin": ["bin/tictac"],
+    "require": {
+        "wp-cli/php-cli-tools": "^0.11.13",
+        "squizlabs/php_codesniffer": "*"
+    }
+}
