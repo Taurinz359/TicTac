@@ -48,7 +48,7 @@ function startGame()
 
         if ($countMoveForCheck < $moveNumber) {
             $winner = checkWinner($currentGameState);
-            if ($winner != "null"){
+            if ($winner != null){
                 line($winner);
                 exit;
             }
@@ -58,7 +58,7 @@ function startGame()
     line("oOps it is Draw! :c ");
 }
 
-function checkWinner(array $currentGameState):string
+function checkWinner(array $currentGameState): ?string
 {   
     $winPositions = [
         [0,1,2],
@@ -95,7 +95,7 @@ function checkWinner(array $currentGameState):string
             $oOccurs=0;
         }
     }
-    return "null";
+    return null;
 }
 
 function showTutorial()
@@ -136,8 +136,10 @@ function showCurrentGameStateTable(array $XOdataArray)
 
 function getPositionFromInput() : int
 {
+    $minUserNum = 0;
+    $maxUserNum = 9;
     $userNum = prompt("choice num 1-9 ");
-    while ($userNum <= 0 || $userNum > 9) {        
+    while ($userNum <= $minUserNum || $userNum > $maxUserNum) {        
         $userNum = prompt ("Please read only 1-9 ");
     }
     return --$userNum;
