@@ -23,6 +23,7 @@ function startGame()
     ];
     $moveNumber = 0;
     $maxSteps = 9;
+    $countMoveForCheck = 3;
     while ($moveNumber < $maxSteps) {
         $evenOdd = $moveNumber % 2;
         if ($evenOdd === 0) {
@@ -45,7 +46,7 @@ function startGame()
         }
         showCurrentGameStateTable($currentGameState);
 
-        if (3 < $moveNumber) {
+        if ($countMoveForCheck < $moveNumber) {
             $winner = checkWinner($currentGameState);
             if ($winner != "null"){
                 line($winner);
