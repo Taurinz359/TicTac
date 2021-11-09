@@ -2,7 +2,7 @@
     "name": "taurinz/php-proj",
     "type": "llibrary",
     "autoload": {
-        "files": ["src/Tictac.php"]
+        "files": ["src/game.php"]
     },
     "bin": ["bin/tictac"],
     "require": {
@@ -10,3 +10,4 @@
         "squizlabs/php_codesniffer": "*"
     }
 }
+
