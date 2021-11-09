@@ -2,9 +2,7 @@
 
 namespace Game;
 
-use function cli\input;
 use function cli\line;
-use function cli\out;
 use function cli\prompt;
 
 function run()
@@ -17,38 +15,28 @@ function run()
 function startGame()
 {
     $currentGameState = [
-        " "," "," ",
-        " "," "," ",
-        " "," "," "
+        " ", " ", " ",
+        " ", " ", " ",
+        " ", " ", " "
     ];
     $moveNumber = 0;
     $maxSteps = 9;
     $countMoveForCheck = 3;
     while ($moveNumber < $maxSteps) {
-        $evenOdd = $moveNumber % 2;
-        if ($evenOdd === 0) {
-            line("\nMove X: ");
-        } else {
-            line("\nMove O: ");
-        }
+        $xO = $moveNumber % 2 === 0 ? "X" : "O";
+        line("Move {$xO}: ");
         $position = getPositionFromInput();
-        if ($currentGameState[$position ] !== " ") {
+        if ($currentGameState[$position] !== " ") {
             line("This position is busy, Try again!");
             continue;
         }
-
         system('clear');
-
-        if ($evenOdd === 0) {
-            $currentGameState[$position] = "X";
-        } else {
-            $currentGameState[$position] = "O";
-        }
+        $currentGameState[$position] = $xO;
         showCurrentGameStateTable($currentGameState);
 
         if ($countMoveForCheck < $moveNumber) {
             $winner = checkWinner($currentGameState);
-            if ($winner != null){
+            if ($winner != null) {
                 line($winner);
                 exit;
             }
@@ -59,40 +47,26 @@ function startGame()
 }
 
 function checkWinner(array $currentGameState): ?string
-{   
+{
     $winPositions = [
-        [0,1,2],
-        [0,3,6],
-        [0,4,8],
-        [1,4,7],
-        [2,5,8],
-        [2,4,6],
-        [3,4,5],
-        [6,7,8]
+        [0, 1, 2],
+        [0, 3, 6],
+        [0, 4, 8],
+        [1, 4, 7],
+        [2, 5, 8],
+        [2, 4, 6],
+        [3, 4, 5],
+        [6, 7, 8]
     ];
-    $xOccurs = 0;
-    $oOccurs = 0;
 
-    for ($i=0; $i < count($winPositions); $i++) { 
-        for ($j=0; $j < count($winPositions[$i]); $j++) { 
-            if($currentGameState[$winPositions[$i][$j]] === "X"){ 
-                ++$xOccurs;
-            }
-            elseif($currentGameState[$winPositions[$i][$j]] === "O"){
-                ++$oOccurs;
-            }
+    foreach ($winPositions as $value) {
+        [$first, $second, $thirth] = $value;
+        $line = $currentGameState[$first] . $currentGameState[$second] . $currentGameState[$thirth];
+        if ($line === "XXX") {
+            return "X the Winner!";
         }
-        if($xOccurs === 3){
-            return "X the Winner";
-        }
-        else{
-            $xOccurs=0;
-        }
-        if($oOccurs === 3){
-            return "O the Winner!";
-        }
-        else{
-            $oOccurs=0;
+        if ($line === "OOO") {
+            return "X the Winner!";
         }
     }
     return null;
@@ -117,7 +91,7 @@ function showTutorial()
 }
 
 function showCurrentGameStateTable(array $XOdataArray)
-{//this function drawing currentGameState
+{ //this function drawing currentGameState
     $XOArray = [
         "=============",
         "       +---+---+---+",
@@ -134,13 +108,13 @@ function showCurrentGameStateTable(array $XOdataArray)
     }
 }
 
-function getPositionFromInput() : int
+function getPositionFromInput(): int
 {
     $minUserNum = 0;
     $maxUserNum = 9;
     $userNum = prompt("choice num 1-9 ");
-    while ($userNum <= $minUserNum || $userNum > $maxUserNum) {        
-        $userNum = prompt ("Please read only 1-9 ");
+    while ($userNum <= $minUserNum || $userNum > $maxUserNum) {
+        $userNum = prompt("Please read only 1-9 ");
     }
     return --$userNum;
 }
