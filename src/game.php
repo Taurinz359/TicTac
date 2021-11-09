@@ -33,7 +33,6 @@ function startGame()
         system('clear');
         $currentGameState[$position] = $xO;
         showCurrentGameStateTable($currentGameState);
-
         if ($countMoveForCheck < $moveNumber) {
             $winner = checkWinner($currentGameState);
             if ($winner != null) {
