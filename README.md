@@ -13,3 +13,6 @@
     $ cd /path/to/directory
     $ composer install
     
+Пример работы приложения
+--------
+[asciinema](https://asciinema.org/a/4n2w5ERn2JQBF2st7U0ISzVsR)
